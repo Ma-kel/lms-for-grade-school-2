@@ -6,6 +6,7 @@ use App\Http\Controllers\GradeController;
 use App\Http\Controllers\ShapeController;
 use App\Http\Controllers\PuzzleController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\RankingController;
 use App\Http\Controllers\ReadingController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\QuestionController;
@@ -72,7 +73,12 @@ Route::group(['middleware' => ['auth', 'role:teacher|student']], function() {
     Route::resource('activities/puzzle', PuzzleController::class);
     Route::resource('activities/shapes', ShapeController::class);
     Route::resource('activities', ActivityController::class);
-    Route::resource('grade', GradeController::class);
+    Route::resource('ranking', RankingController::class);
+    Route::get('student-response/{id}/{subject_id}', 'App\Http\Controllers\GradeController@studentResponse')->name('student-response.index');
+    Route::resource('grade', GradeController::class)->except([
+        'edit'
+    ]);
+    Route::get('grade-edit/{id}/{student_id}', 'App\Http\Controllers\GradeController@edit')->name('grade.edit');
     
     // new routes for redefense
     Route::get('student-progress/{id}', 'App\Http\Controllers\AccountController@studentProgress')->name('student-progress');

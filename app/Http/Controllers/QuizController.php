@@ -48,6 +48,7 @@ class QuizController extends Controller
             'instruction' => 'required|string',
             'deadline' => 'required',
             'category' => 'required',
+            'grading' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -64,7 +65,7 @@ class QuizController extends Controller
             $quiz->instruction = $request->input('instruction');
             $quiz->deadline = $request->input('deadline');
             $quiz->category = $request->input('category');
-
+            $quiz->grading = $request->input('grading');
 
             $quiz->subject()->associate($request->input('subject_id'));
             $quiz->user()->associate($user_id);
@@ -317,6 +318,7 @@ class QuizController extends Controller
             ->where('category', 'quiz')
             ->where('subject_id', $id)
             ->with('user')
+            ->orderBy('grading')
             ->get();
 
             return view('quiz', ['quizzes'=> $quizzes, 'subject_id'=> $id]);
@@ -328,6 +330,7 @@ class QuizController extends Controller
             ->where('category', 'quiz')
             ->where('subject_id', $id)
             ->with('user')
+            ->orderBy('grading')
             ->get();
 
             return view('quiz', ['quizzes'=> $quizzes, 'subject_id'=> $id]);

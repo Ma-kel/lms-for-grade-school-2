@@ -15,6 +15,7 @@ class Quiz extends Model
         'instruction',
         'deadline',
         'category',
+        'grading',
     ];
     
     public function user()

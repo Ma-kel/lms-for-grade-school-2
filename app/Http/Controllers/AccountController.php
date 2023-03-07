@@ -291,12 +291,22 @@ class AccountController extends Controller
             $user->attachRole($request->role_id);
 
             $user_id = $user->id;
-
+            $user_grade = $user->grade;
+            $subjects = Subject::where('grade_level_id', $user_grade)->get();
+            
             if ($user->hasRole('student')) {
-                $grade = Grade::create([
-                    'user_id' => $user_id,
-                    'grade' => 'n/a'
-                ]);
+                foreach($subjects as $subject ) {
+                    $grade = Grade::create([
+                        'user_id' => $user_id,
+                        'first_grading' => 'n/a',
+                        'second_grading' => 'n/a',
+                        'third_grading' => 'n/a',
+                        'fourth_grading' => 'n/a',
+                        'average' => 'n/a',
+                        'subject_id' => $subject->id,
+                    ]);
+                }
+                
             }
 
             return response()->json([

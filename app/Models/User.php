@@ -103,4 +103,9 @@ class User extends Authenticatable
     { 
         return $this->hasMany(Activities::class);
     }
+    
+    public function average() 
+    { 
+        return $this->hasMany(Average::class);
+    }
 }

@@ -99,6 +99,18 @@
                                 <x-input id="instruction" class="block mt-1 w-full" type="text" name="instruction" :value="old('instruction')" />
                             </div>
                 
+                            <!-- Select Grading -->
+                            <div class="mt-4">
+                                <x-label for="grading" value="{{ __('Grading:') }}" />
+                                <select name="grading" id="grading" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                                    <option> Select Grading </option>
+                                    <option value="1">1st Grading</option>
+                                    <option value="2">2nd Grading</option>
+                                    <option value="3">3rd Grading</option>
+                                    <option value="4">4th Grading</option>
+                                </select>
+                            </div>
+                    
                             <!-- Deadline -->
                             <div class="mt-4">
                                     <x-label for="deadline" :value="__('Deadline')" />

@@ -37,8 +37,8 @@
                                                 <th>Name</th>
                                                 @if(Auth::user()->hasRole('admin'))
                                                 <th>Account Type</th>
-                                                @endif
                                                 <th>Grade Level</th>
+                                                @endif
                                                 <th>Email</th>
                                                 <th>Action</th>
                                             </tr>
@@ -53,6 +53,7 @@
                                                 <td> {{$role->name}} </td>
                                                 @endif
                                                 @endforeach
+                                                @if(Auth::user()->hasRole('admin'))
                                                 <td>
                                                     @if($user->grade != null)
                                                     <span>Grade {{$user->grade}}</span>
@@ -60,6 +61,7 @@
                                                     <span>admin</span>
                                                     @endif
                                                 </td>
+                                                @endif
                                                 <td> {{$user->email}} </td>
                                                 <td>
                                                     @if(Auth::user()->hasRole('teacher|admin'))
@@ -476,6 +478,7 @@
                     response.message,
                     'success'
                 )
+                location.reload();
             }
         });
     });

@@ -29,4 +29,9 @@ class Subject extends Model
     { 
         return $this->hasMany(Activities::class);
     }
+    
+    public function grade() 
+    {
+        return $this->hasMany(Grade::class);
+    }
 }

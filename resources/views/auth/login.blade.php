@@ -35,16 +35,15 @@
                                     required autocomplete="current-password" />
                 </div>
     
-                <div class="w-full py-4">
-                    <!-- @if (Route::has('password.request'))
-                        <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                            {{ __('Forgot your password?') }}
-                        </a>
-                    @endif -->
-    
-                    <x-button class="">
+                <div class="w-full py-4 text-center">
+                    <x-button class="my-2">
                         {{ __('Login') }}
                     </x-button>
+                    @if (Route::has('password.request'))
+                        <a class="underline text-md" href="{{ route('password.request') }}">
+                            {{ __('Forgot your password?') }}
+                        </a>
+                    @endif
                 </div>
 
                 <!-- Remember Me -->

@@ -33,7 +33,14 @@
                     </x-nav-link>
                 </div>
                 @endif
-                
+                @if(Auth::user()->hasRole('teacher'))
+                <div class="hidden space-x-8 sm:-my-px sm:flex">
+                    <x-nav-link :href="route('ranking.index')" :active="request()->routeIs('ranking.index')">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="m12 3.879-7.061 7.06 2.122 2.122L12 8.121l4.939 4.94 2.122-2.122z"></path><path d="m4.939 17.939 2.122 2.122L12 15.121l4.939 4.94 2.122-2.122L12 10.879z"></path></svg>
+                        {{ __('Ranking') }}
+                    </x-nav-link>
+                </div>
+                @endif
                 @if(Auth::user()->hasRole('teacher|student'))
                 <!-- <div class="hidden space-x-8 sm:-my-px sm:flex">
                     <x-nav-link :href="route('activities.index')" :active="request()->routeIs('activities.index')">
@@ -49,7 +56,6 @@
                     </x-nav-link>
                 </div>
                 @endif
-               
 
             </div>
 

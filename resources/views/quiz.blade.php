@@ -32,6 +32,7 @@
                                         <tr>
                                             <th>Quiz</th>
                                             <th>Instruction</th>
+                                            <th>Grading</th>
                                             <th>Uploaded</th>
                                             <th>Deadline</th>
                                             <th>Action</th>
@@ -43,6 +44,7 @@
                                             <tr>
                                                 <td> {{ $quiz->quiz_name }} </td>
                                                 <td> {{ $quiz->instruction }} </td>
+                                                <td> {{ $quiz->grading }} </td>
                                                 <td> {{ Carbon\carbon::parse($quiz->created_at)->format('d/m/Y g:i A') }} </td> 
                                                 <td> {{ Carbon\carbon::parse($quiz->deadline)->format('d/m/Y g:i A') }} </td>
                                                 <td>
@@ -56,6 +58,10 @@
                                             </tr>
                                         @empty 
                                             <td>NO DATA FOUND</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         @endforelse
                                     </tbody>
                                 </table>
@@ -80,10 +86,10 @@
                 
                 <form method="POST" enctype="multipart/form-data" id="store-quiz" action="javascript:void(0)" >
                     <div class="modal-body px-5">
-                       <!-- input fields -->
-                
-                       <ul id="save_errlist"></ul>
-                                                  
+                        <!-- input fields -->
+                    
+                        <ul id="save_errlist"></ul>
+                                                    
                             <input type="hidden" id="subject_id" name="subject_id" value="{{ $subject_id }}">
                             <input type="hidden" id="category" name="category" value="quiz">
                         
@@ -97,6 +103,18 @@
                             <div class="mt-4">
                                 <x-label for="instruction" :value="__('Instruction')" />
                                 <x-input id="instruction" class="block mt-1 w-full" type="text" name="instruction" :value="old('instruction')" />
+                            </div>
+                            
+                            <!-- Select Grading -->
+                            <div class="mt-4">
+                                <x-label for="grading" value="{{ __('Grading:') }}" />
+                                <select name="grading" id="grading" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                                    <option> Select Grading </option>
+                                    <option value="1">1st Grading</option>
+                                    <option value="2">2nd Grading</option>
+                                    <option value="3">3rd Grading</option>
+                                    <option value="4">4th Grading</option>
+                                </select>
                             </div>
                 
                             <!-- Deadline -->
@@ -147,6 +165,18 @@
                         <x-input id="edit_instruction" class="block mt-1 w-full" type="text" name="instruction" :value="old('instruction')" />
                     </div>
         
+                    <!-- Select Grading -->
+                    <div class="mt-4">
+                        <x-label for="edit_grading" value="{{ __('Grading:') }}" />
+                        <select name="edit_grading" id="edit_grading" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                            <option> Select Grading </option>
+                            <option value="1">1st Grading</option>
+                            <option value="2">2nd Grading</option>
+                            <option value="3">3rd Grading</option>
+                            <option value="4">4th Grading</option>
+                        </select>
+                    </div>
+        
                     <!-- Deadline -->
                     <div class="mt-4">
                             <x-label for="deadline" :value="__('Deadline')" />
@@ -193,7 +223,7 @@
 <script>
     
     $(document).ready(function () {
-           
+        
         // store
         $(document).on('submit','#store-quiz', function(e) { 
             e.preventDefault();
@@ -271,6 +301,7 @@
                         $('#edit_quiz_name').val(response.quiz.quiz_name);
                         $('#edit_instruction').val(response.quiz.instruction);
                         $('#edit_deadline').val(response.quiz.deadline);
+                        $('#edit_grading').val(response.quiz.grading);
                         $('#edit_quiz_id').val(quiz_id);
                     }
                     

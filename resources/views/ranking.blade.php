@@ -14,7 +14,7 @@
                     <!-- table -->                                
                     <div class="mb-4">
                         <div class="card-header py-3 d-flex justify-content-between align-items-center">
-                            <h3 class="m-0 font-weight-bold text-primary fw-bold">Grades</h3>
+                            <h3 class="m-0 font-weight-bold text-primary fw-bold">Ranking</h3>
                         </div>
                             
                         <div id="success_message"> </div>
@@ -26,32 +26,21 @@
                                 
                                     <thead>
                                         <tr>
+                                            <th>Rank</th>
                                             <th>Name</th>
                                             <th>Average</th>
-                                            @if(Auth::user()->hasRole('teacher'))
-                                                <th>Action</th>
-                                            @endif
+                        
                                         </tr>
                                     </thead>
                                     
                                     <tbody class="account-list">
-                                        @foreach($students as $student)
+                                        @foreach($user_averages as $user_average)
                                             <tr>
-                                                <td style="width: 70%"> {{ $student->name }}</td>
-                                                @forelse($student->average as $average)
-                                                    <td>{{ $average->general_average }}</td>
-                                                @empty 
-                                                    <td> n/a </td>
-                                                @endforelse
-                                                
-                                                <td>
-                                                    @if(Auth::user()->hasRole('teacher'))
-                                                        <a href="{{ route('grade.show',  $student->id ) }}" class="btn btn-primary"> Show </a>
-                                                    @endif
-                                                </td>
+                                                <td style="width: 15%;"> {{$loop->iteration}} </td>                                                  
+                                                <td style="width: 55%;"> {{$user_average->user->name}} </td>
+                                                <td>  {{$user_average->general_average}} </td>                                                
                                             </tr>
                                         @endforeach
-                                        
                                     </tbody>
                                 </table>
                             </div>

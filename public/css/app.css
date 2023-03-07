@@ -184733,6 +184733,41 @@ canvas.shape-board {
   border: 1px solid;
 }
 
+/* student-response (accordion) */
+.accordion .accordion-item{
+    margin: 0.5rem 0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.accordion-titel{
+    padding: 10px 15px;
+    cursor: pointer;
+    background: cadetblue;
+    color: #ffffff
+}
+.accordion-contant{
+    padding: 15px ;
+    display: none;
+}
+.accordion-contant .d-flex  { 
+    cursor: pointer;
+}
+.accordion-contant .d-flex li:hover{ 
+    color: #4eb3ed;
+}
+.accordion-titel strong span{
+    float: right;
+}
+.accordion-contant .selected { 
+    color: #4eb3ed;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+.accordion-contant .tab-content > div:not(:first-of-type) { 
+    display: none;
+}
+
+
 
 
 

@@ -27,7 +27,11 @@
                                                 @endif
                                             </div>
                                             <div class="text-sm text-center text-uppercase mb-1">                                                
-                                                {{ Carbon\carbon::parse($subject->start)->format('g:i A') }} - {{ Carbon\carbon::parse($subject->end)->format('g:i A') }}
+                                                @if(Carbon\carbon::parse($subject->start)->format('g:i A') == '12:00 AM' && Carbon\carbon::parse($subject->end)->format('g:i A') == '12:00 AM')
+                                                    <span class="text-danger"> NO SCHEDULED ASSIGNED </span>
+                                                @else
+                                                    {{ Carbon\carbon::parse($subject->start)->format('g:i A') }} - {{ Carbon\carbon::parse($subject->end)->format('g:i A') }}
+                                                @endif
                                             </div>
                                                                                 
                                         </div>

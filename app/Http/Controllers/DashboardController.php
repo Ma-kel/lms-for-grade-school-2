@@ -142,9 +142,18 @@ class DashboardController extends Controller
           // where subject id is equal to subject_id
           if (Auth::user()->hasRole('student'))
           {
-               $quizzes_count = Quiz::with('subject')->where('subject_id', $id)->where('category', 'quiz')->doesnthave('results')->count();
-               $exercises_count = Quiz::with('subject')->where('subject_id', $id)->where('category', 'exercise')->doesnthave('results')->count();
-               $exams_count = Quiz::with('subject')->where('subject_id', $id)->where('category', 'exams')->doesnthave('results')->count();
+               $quizzes_count = Quiz::with('subject')->where('subject_id', $id)->where('category', 'quiz')->whereDoesntHave('results', function ($q) { 
+                    $q->where('user_id', Auth::id());
+               })->count();
+               
+               $exercises_count = Quiz::with('subject')->where('subject_id', $id)->where('category', 'exercise')->whereDoesntHave('results', function ($q) { 
+                    $q->where('user_id', Auth::id());
+               })->count();
+               
+               $exams_count = Quiz::with('subject')->where('subject_id', $id)->where('category', 'exams')->whereDoesntHave('results', function ($q) { 
+                    $q->where('user_id', Auth::id());
+               })->count();
+               
                $activities_count = Activities::with('subject')->where('subject_id', $id)->count();
           }
           else 

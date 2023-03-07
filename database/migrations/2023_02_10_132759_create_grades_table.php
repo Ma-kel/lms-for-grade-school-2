@@ -15,10 +15,17 @@ class CreateGradesTable extends Migration
     {
         Schema::create('grades', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('grade')->nullable()->default('n/a');
+            $table->string('first_grading')->nullable()->default('n/a');
+            $table->string('second_grading')->nullable()->default('n/a');
+            $table->string('third_grading')->nullable()->default('n/a');
+            $table->string('fourt_grading')->nullable()->default('n/a');
+            $table->string('average')->nullable()->default('n/a');
             
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('subject_id')->unsigned()->nullable();
+            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
+            
             $table->timestamps();
         });
     }
